@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import axios from 'axios'
-import { ErrorChecker } from "../utils/errorChecker"
+import ErrorChecker from "../utils/errorChecker"
 
 export const GET_DATA = async(url='') => {
     const data = await axios.get(url)

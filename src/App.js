@@ -1,7 +1,7 @@
 
 import { useGetData } from './hooks/useGetData';
 import './App.css';
-import { Genres } from './components/Genres/Genres';
+import CategoriesAndLevels from './components/CategoriesAndLevels/CategoriesAndLevels';
 function App() {
   // categories
   const categoriesURL = 'https://the-trivia-api.com/api/categories'
@@ -10,7 +10,7 @@ function App() {
 
   return (
     <div className="app">
-       <Genres/>
+       <CategoriesAndLevels/>
     </div>
   );
 }

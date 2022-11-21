@@ -15,8 +15,5 @@ export const stateSlice = createSlice({
         REMOVE_CATEGORY(state,action){
             state.chosenCategories = state.chosenCategories.filter((category) => category !== action.payload)
         },
-        SET_CATEGORIES(state,action){
-            state.chosenCategories = action.payload
-        }
     }
 })
