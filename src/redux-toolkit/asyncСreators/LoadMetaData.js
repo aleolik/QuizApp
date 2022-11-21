@@ -5,7 +5,7 @@ export const LoadMetaData = () => {
     return async(dispatch,getState) => {
         const MetaDataURL = 'https://the-trivia-api.com/api/metadata'
         const {LOAD_META_DATA,LOAD_META_DATA_SUCCESS,LOAD_META_DATA_ERROR} = MetaDataSlice.actions
-        dispatch(LOAD_META_DATA)
+        dispatch(LOAD_META_DATA())
         axios.get(MetaDataURL).then((res) => {
             if (res?.status === 200){
                 const resData = res?.data
