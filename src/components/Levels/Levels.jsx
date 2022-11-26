@@ -58,12 +58,12 @@ const Levels = () => {
                 {typeof levels === 'object' && Object.keys(levels).length
                 ? (
                   <div>
-                      <h4>Active levels : {chosenLevels.length},click on button to activate/deactivate</h4>
+                      <h4>Active levels :  {`{${chosenLevels.length}}`},click on button to activate/deactivate</h4>
                       {Object.entries(levels).map(([level,value]) => {
                         // for some reason in DB,there is a null key,don't for what it stands for
                         if (level === 'null') return;
                         return(
-                          <button onClick={() => REMOVE_OR_ADD_LEVEL(level)} className={`${chosenLevels.includes(level) ? 'level-button active' : 'level-button'}`}>{level}</button>
+                          <button key={level} onClick={() => REMOVE_OR_ADD_LEVEL(level)} className={`${chosenLevels.includes(level) ? 'level-button active' : 'level-button'}`}>{level}</button>
                         ) 
                       })}
                   </div>

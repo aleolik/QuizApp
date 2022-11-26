@@ -1,0 +1,135 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
+.containerOfQuestions{
+    width: 60vw;
+    height: 30vh;
+    border: 1px solid white;
+    max-width: 60vw;
+    max-height: 25vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 1vh;
+    flex-direction: column;
+}
+.selectQuestion{
+    border: 2px solid #d2bdff;
+    height: 3vh;
+    width: 5vw;
+    border-radius: 4px;
+    position: relative;
+    cursor: pointer;
+    font-family: "Roboto", sans-serif;
+}
+.selectQuestion::after{
+    position: absolute;
+    top: 41%;
+    left: 50%;
+    transform: translate(-50%);
+    color: #d2bdff;
+    transition: all 0.1s linear;
+}
+@keyframes star {
+    0% {
+      margin-left: -8px;
+      margin-top: -8px;
+    }
+    25% {
+      margin-left: 194px;
+      margin-top: -8px;
+    }
+
+    50% {
+      margin-left: 194px;
+      margin-top: 75px;
+    }
+    75% {
+      margin-left: -8px;
+      margin-top: 75px;
+    }
+    100% {
+      margin-left: -8px;
+      margin-top: -8px;
+    }
+  }
+.selectQuestion::before{
+    position: relative;
+    display: block;
+    height: 15px;
+    width: 15px;
+    background: #d2bdff;
+    box-shadow: 0px 0px 10px 3px #0ff;
+    margin-left: -8px;
+    margin-top: -8px;
+    opacity: 0;
+    transition: all 0.1s linear;
+    border-radius: 100%;
+    animation: star 1.3s linear infinite;
+}
+.selectQuestion:hover,.selectQuestion::before{
+    opacity: 1;
+    animation: star 1.3s linear infinite;
+}
+.selectQuestion::after{
+    content: "I'M GLOWING";
+    text-shadow: 0 0 10px #fff, 0 0 10px #fff, 0 0 20px #82bedc,
+      0 0 30px #82bedc, 0 0 40px #82bedc, 0 0 50px #82bedc, 0 0 60px #82bedc;
+}
+.selectQuestionContainer{
+    width: 70vw;
+    height: 80vh;
+    max-width: 70vw;
+    max-height: 80vh;   
+    border: 1px solid white;
+}
+
+
+
+/* CSS */
+.buttonAnswer {
+  appearance: none;
+  background-color: #FFFFFF;
+  border-radius: 40em;
+  border-style: none;
+  box-shadow: #ADCFFF 0 -12px 6px inset;
+  box-sizing: border-box;
+  color: #000000;
+  cursor: pointer;
+  display: inline-block;
+  font-family: -apple-system,sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: -.24px;
+  margin: 1vh;
+  outline: none;
+  padding: 1rem 1.3rem;
+  quotes: auto;
+  text-align: center;
+  text-decoration: none;
+  transition: all .15s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  min-width: 15vw;
+  width: 45vw;
+  max-width: 60vw;
+  max-height: 3.5vh;
+}
+
+.buttonAnswer:hover {
+  background-color: #FFC229;
+  box-shadow: #FF6314 0 -6px 8px inset;
+  transform: scale(1.125);
+}
+
+.buttonAnswer:active {
+  transform: scale(1.025);
+}
+
+@media (min-width: 15vw) {
+  .buttonAnswer{
+    font-size: 1rem;
+    padding: .75rem 2rem;
+  }
+}

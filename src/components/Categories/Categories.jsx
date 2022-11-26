@@ -58,7 +58,7 @@ const Categories = () => {
                     {typeof categories === 'object' && Object.keys(categories).length
                     ? (
                       <div>
-                           <h6>Active categoreis : {chosenCategories.length},click on button to activate/deactivate</h6>
+                           <h6>Active categoreis : {`{${chosenCategories.length}}`},click on button to activate/deactivate</h6>
                            {Object.entries(categories).map(([name,value]) => {
                               return(
                                   <button onClick={() => ADD_OR_REMOVE_CATEGORY(name)} className={`${chosenCategories.includes(name) ? 'category-btn active' : 'category-btn'}`} key={name}>{name} : {value}</button>

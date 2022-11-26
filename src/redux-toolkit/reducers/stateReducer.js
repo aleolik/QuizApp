@@ -2,7 +2,9 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export const initialState = {
     chosenCategories : [],
-    chosenLevels : []
+    chosenLevels : [],
+    InGame : false,
+    currentPage : 0, // var for questions display
 }
 
 export const stateSlice = createSlice({
@@ -26,6 +28,9 @@ export const stateSlice = createSlice({
         },
         SET_LEVEL(state,action){
             state.chosenLevels = action.payload
+        },
+        START_GAME(state){
+            state.InGame = true
         }
     }
 })

@@ -1,9 +1,9 @@
-import './Loader.css'
+import css from './Loader.module.css'
 import React from 'react'
 
 const Loader = () => {
   return (
-    <span className="loader"></span>
+    <span className={css.loader}></span>
   )
 }
 
