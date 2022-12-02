@@ -39,7 +39,7 @@ function App() {
   return (
     <div className="app">
         {showModal
-        ? (
+         && (
           <Modal>
             {currentSetting === 'Categories' && (
                 <Categories AllCategories={AllCategories}/>
@@ -48,8 +48,7 @@ function App() {
                 <Levels AllLevels={AllLevels}/>
             )}
           </Modal>
-        )
-        : (
+        )}
           <>
              <div className='purples centerdDiv' style={{'fontSize':25,'marginBottom':0.5+'vh'}}>Trivia App</div>
              <div className='centerdDiv'><AiFillSetting  onClick={SettingsOnClick} size={60} className='settingsBtn'></AiFillSetting></div>
@@ -63,7 +62,6 @@ function App() {
                 </div>
               )}
           </>
-        )}
     </div>
   );
 }

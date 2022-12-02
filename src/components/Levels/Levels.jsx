@@ -5,6 +5,7 @@ import { useState } from 'react'
 import { stateSlice } from '../../redux-toolkit/reducers/stateReducer'
 import Loader from '../Loader/Loader'
 import {AiOutlineClose} from 'react-icons/ai'
+import SideBar from '../SideBar/SideBar'
 // TODO : delete useless code,levels is an array now not an object,so fix it
 const Levels = ({AllLevels}) => {
   const dispatch = useDispatch()

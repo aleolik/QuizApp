@@ -13,7 +13,7 @@ export const initialState = {
         currentSetting can be :
         any variant in PossibleSettings
     */
-    currentSetting : 'Levels'
+    currentSetting : 'Categories'
 
 }
 

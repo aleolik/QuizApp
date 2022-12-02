@@ -4,6 +4,7 @@ import Loader from '../Loader/Loader'
 import { useDispatch, useSelector } from 'react-redux'
 import { stateSlice } from '../../redux-toolkit/reducers/stateReducer'
 import {AiOutlineClose} from 'react-icons/ai'
+import SideBar from '../SideBar/SideBar'
 const Categories = ({AllCategories}) => {
     const dispatch = useDispatch()
     const [selectError,setSelectedError] = useState('') // works,if chosenCategories.length === 1 and trying to delete the last category
