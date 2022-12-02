@@ -1,8 +1,7 @@
 import axios from "axios"
-import { MetaDataSlice } from "../reducers/MetaDataReducer"
 import ErrorChecker from '../../utils/errorChecker'
 import { QuestionSlice } from "../reducers/QuestionsReducer"
-
+import { shuffleArray } from "../../utils/shuffleArray"
 export const GetRandomInt = (maxNum) => {
     return Math.floor(Math.random() * maxNum)
 }
@@ -28,36 +27,32 @@ export const LoadQuestions = () => {
         const {chosenLevels,chosenCategories} = getState().stateReducer
         const ChosenCategoriesToLowerCase = []
         // ---- PROCESSING CATEGORIES IN NEEDED FORM ----
-        for (let i = 0;i<chosenCategories;i++){
-            const LowerCaseCategory = chosenLevels[i].toLowerCase()
-            for (let j = 0;i<LowerCaseCategory.length;j++){
-                if (LowerCaseCategory[j] === '&' || LowerCaseCategory[j] === ' '){
-                    let newStr;
-                    if (LowerCaseCategory[j] === '&'){
-                        newStr = LowerCaseCategory[j].slice(0,j)+'and'+LowerCaseCategory[j+1].slice
-                        ChosenCategoriesToLowerCase.push(newStr)
-                        return;
-                    }
-                    newStr = LowerCaseCategory[j].slice(0,j)+'_'+LowerCaseCategory[j+1].slice
-                    ChosenCategoriesToLowerCase.push(newStr)
-                    return;
+        for (let i = 0;i<chosenCategories.length;i++){
+            const LowerCaseCategory = chosenCategories[i].toLowerCase().split(' ')
+            for (let j = 0;j<LowerCaseCategory.length;j++){
+                console.log(LowerCaseCategory.length)
+                if (LowerCaseCategory[j] === ' '){
+                    LowerCaseCategory[j] = '_'
+                }
+                if (LowerCaseCategory[j]  === '&'){
+                    LowerCaseCategory[j] = 'and'
                 }
             }
+            ChosenCategoriesToLowerCase.push(LowerCaseCategory.join('_'))
         }
         const {LoadQuestions,LoadQuestionsError,LoadQuestionsSuccess} = QuestionSlice.actions
         // ---- URL LOGIC --
         let QuestionURL = `https://the-trivia-api.com/api/questions?categories=${chosenCategories.join(',')}`
         const NumsForLevels = GetNumsForLevels(chosenLevels,NUM_OF_QUESTIONS)
-        console.log(ChosenCategoriesToLowerCase,NumsForLevels)
         console.log(ChosenCategoriesToLowerCase.join(','))
-        const FirstQuestionURL = `https://the-trivia-api.com/api/questions?categories=${chosenCategories.join(',')}&limit=${NumsForLevels[0]}&difficulty=${chosenLevels[0]}`
+        const FirstQuestionURL = `https://the-trivia-api.com/api/questions?categories=${ChosenCategoriesToLowerCase.join(',')}&limit=${NumsForLevels[0]}&difficulty=${chosenLevels[0]}`
         let SecondQuestionURL;
         let thirdQuestionURL;
         if (chosenLevels.length > 1){
-            SecondQuestionURL = `https://the-trivia-api.com/api/questions?categories=${chosenCategories.join(',')}&limit=${NumsForLevels[1]}&difficulty=${chosenLevels[1]}`
+            SecondQuestionURL = `https://the-trivia-api.com/api/questions?categories=${ChosenCategoriesToLowerCase.join(',')}&limit=${NumsForLevels[1]}&difficulty=${chosenLevels[1]}`
         }
         if (chosenLevels.length > 2){
-            thirdQuestionURL = `https://the-trivia-api.com/api/questions?categories=${chosenCategories.join(',')}&limit=${NumsForLevels[2]}&difficulty=${chosenLevels[2]}`
+            thirdQuestionURL = `https://the-trivia-api.com/api/questions?categories=${ChosenCategoriesToLowerCase.join(',')}&limit=${NumsForLevels[2]}&difficulty=${chosenLevels[2]}`
         }
         // ---- ASYNC CALLS ---
         // ---- FIRST CALL WILL BE ALWAYS
@@ -83,8 +78,20 @@ export const LoadQuestions = () => {
                     ArrOfQuestions.push(element)
                 });
             }
+            ArrOfQuestions.forEach((question,i) => {
+                let AllAnswers = []
+                const incorrectAnswers = question['incorrectAnswers']
+                const correctAnswer = question['correctAnswer']
+                if (Array.isArray(incorrectAnswers)){
+                    AllAnswers = [...incorrectAnswers,correctAnswer]
+                    AllAnswers = shuffleArray(AllAnswers)
+                }
+                question['AllAnswers'] = AllAnswers
+                ArrOfQuestions[i] = question
+            })
             setTimeout(() => {
                 dispatch(LoadQuestionsSuccess(ArrOfQuestions))
+                
             }, 1200);
         }
         catch(err){

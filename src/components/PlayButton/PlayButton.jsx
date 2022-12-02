@@ -7,15 +7,26 @@ import Loader from '../Loader/Loader'
 const PlayButton = () => {
   const {START_GAME} = stateSlice.actions
   const dispatch = useDispatch()
-  const metaDataLoading = useSelector(state => state.metaDataReducer.metaDataLoading)
+  const {metaDataLoading,metaDataError} = useSelector(state => state.metaDataReducer)
 
   const START_GAME_ON_CLICK = () => {
-    if (metaDataLoading) return;
+    if (metaDataLoading || metaDataError) return;
     dispatch(START_GAME())
   }
   return (
     <div>
-      <h6 style={{'textAlign':'center'}}>{metaDataLoading && 'Please wait for loading...'}</h6>
+      {metaDataLoading
+      ? (
+        <h6 style={{'textAlign':'center'}}>Please wait for loading...</h6>
+      )
+      : (
+        <>
+          {metaDataError && (
+              // TODO : give error classname
+              <h6 style={{'textAlign':'center'}}>{metaDataError}</h6>
+          )}
+        </>
+      )}
       <div onClick={START_GAME_ON_CLICK} className="wrapper">
         <a  className="cta" href="#">
             <span>Play</span>

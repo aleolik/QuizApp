@@ -1,12 +1,10 @@
 .levels{
-    margin-top: 2vh;
     display: flex;
     text-align: center;
     justify-content: center;
     align-items: center;
     width: 60vw;
     height: 20vh;
-    margin-left: 20vw;
     background-color: rgb(40,40,40);
     border: 5px solid rgb(64,64,64);
     flex-wrap: wrap;

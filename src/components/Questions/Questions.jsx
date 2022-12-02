@@ -1,36 +1,26 @@
-import css from './Questions.module.css'
+import css from './Questions.module.scss'
 import React from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import { useEffect } from 'react'
 import { LoadQuestions } from '../../redux-toolkit/asyncСreators/LoadQuestions'
 import LoaderForQuestions from '../LoaderForQuestions/LoaderForQuestions'
-export const shuffleArray = (array) => {
-    let currentIndex = array.length,  randomIndex;
-  
-    // While there remain elements to shuffle.
-    while (currentIndex != 0) {
-  
-      // Pick a remaining element.
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex--;
-  
-      // And swap it with the current element.
-      [array[currentIndex], array[randomIndex]] = [
-        array[randomIndex], array[currentIndex]];
-    }
-  
-    return array;
-  }
+import { shuffleArray } from '../../utils/shuffleArray'
+import { stateSlice } from '../../redux-toolkit/reducers/stateReducer'
+import {TimeOfGame} from '../TimeOfGame/TimeOfGame'
+// TODO answer the question bug
 const Questions =  () => {
     const dispatch = useDispatch()
-    const {chosenLevels,chosenCategories,inGame,currentPage} = useSelector(state => state.stateReducer)
+    const {chosenLevels,chosenCategories,inGame,COMPLETED_QUESTONS,currentQuestion} = useSelector(state => state.stateReducer)
     const {Questions,loadQuestions,QuestionsError} = useSelector(state => state.questions)
-
+    const {CHANGE_CURRENT_QUESTION,ADD_ANSWER_TO_QUESTION} = stateSlice.actions
     useEffect(() => {
         if (!chosenCategories.length && !chosenLevels.length) return;
         dispatch(LoadQuestions())
     },[inGame])
 
+    const ANSWER_ON_CLICK = (newElem) => {
+        dispatch(ADD_ANSWER_TO_QUESTION({newElem}))
+    }
     return(
         <div style={{'display':'flex','alignItems':'center','height':'inherit','width':'inherit','flexDirection':'column'}}>
             {loadQuestions && !QuestionsError
@@ -44,38 +34,59 @@ const Questions =  () => {
                         <div className={css.error}>{QuestionsError}</div>
                     )
                     : (
-                        <div className={css.selectQuestionContainer}>
-                                {Questions?.map((question,i) => {
-                                    return(
-                                        <button style={{'maxWidth':70/Questions.length+'vw'}} className={css.selectQuestion}>{i+1}</button>
-                                    )
-                                })}
-                            {/* {Questions?.slice(currentPage*5,currentPage*5+3).map((questionObject,i) => {
-                                const category = questionObject?.category
-                                const correctAnswer = questionObject?.correctAnswer
-                                const difficulty = questionObject?.difficulty
-                                const id = questionObject?.id
-                                const incorrectAnswers = questionObject?.incorrectAnswers // array of 3 elems
-                                const question = questionObject?.question
-                                const type = questionObject?.typ
-                                let AllAnswers = [];
-                                if (Array.isArray(incorrectAnswers)){
-                                    AllAnswers = [...incorrectAnswers,correctAnswer]
-                                    AllAnswers = shuffleArray(AllAnswers)
-                                }
-                                return(
-                                    <div key={id} className='mint'>
-                                        <div className={css.containerOfQuestions}>
-                                            {question}
-                                            {AllAnswers.map((answer) => {
-                                                return(
-                                                    <button class={css.buttonAnswer} role="button"><span class="text" key={answer}>{answer}</span></button>
-                                                )
-                                            })}
-                                        </div>
-                                    </div>
-                                )
-                            })} */}
+                        <div className={css.container}>
+                                <TimeOfGame/>
+                                <div className={css.containerOfSelectors}>
+                                    {Questions?.map((question,i) => {
+                                        let answeredQuestion = false
+                                        if (Array.isArray(COMPLETED_QUESTONS) && COMPLETED_QUESTONS.length){
+                                            COMPLETED_QUESTONS.forEach((elem) => {
+                                                const index = elem?.index
+                                                if (index === i){
+                                                    answeredQuestion = true
+                                                }
+                                            })
+                                        }
+                                        return(
+                                             <button key={i} onClick={() => dispatch(CHANGE_CURRENT_QUESTION(i))} style={{'width':90*2/Questions.length+'vw'}}  className={i === currentQuestion ? [css.activeBtn,css.glowButton].join(' ') : answeredQuestion ? [css.glowButton,css.completedQuestion].join(' ') :css.glowButton} type="button">{i+1}</button>                    
+                                        )
+                                    })}
+                                </div>
+                                <div className={css.containerOfQuestion}>
+                                    {Questions?.map((questionObject,indexOfQuestion) => {
+                                        if (indexOfQuestion !== currentQuestion) return;
+                                        const category = questionObject?.category
+                                        const correctAnswer = questionObject?.correctAnswer
+                                        const difficulty = questionObject?.difficulty
+                                        const id = questionObject?.id
+                                        const incorrectAnswers = questionObject?.incorrectAnswers // array of 3 elems
+                                        const question = questionObject?.question
+                                        const AllAnswers = questionObject?.AllAnswers
+                                        return(
+                                            <div key={id} className='mint'>
+                                                <div style={{'display':'flex','flexDirection':'column','paddingTop':2+'vh'}}>
+                                                    <div className={css.textMaxSymbols}>{category} - {difficulty}</div>
+                                                    <div></div>
+                                                    <div className={css.textMaxSymbols}>{question}</div>
+                                                    {AllAnswers.map((answer) => {
+                                                    let glowAnsweredButton = false
+                                                    COMPLETED_QUESTONS.forEach((elem) => {
+                                                        const tempAnswer = elem?.answer
+                                                        const index = elem?.index
+                                                        if (answer === tempAnswer && indexOfQuestion === index){
+                                                            glowAnsweredButton = true
+                                                        }
+                                                    })
+                                                        return(
+                                                            <button key={answer} onClick={() => ANSWER_ON_CLICK({index:indexOfQuestion,answer:answer})}  className={glowAnsweredButton ? [css.buttonAnswerActive,css.buttonAnswer].join(' ') : css.buttonAnswer} role="button"><span>{answer}</span></button>
+                                                        )
+                                                    })}
+                                                </div>
+                                                <button className={css.endBtn}>Finish Test</button>
+                                            </div>
+                                        )
+                                    })}
+                                </div>
                         </div>
                     )}
                 </>

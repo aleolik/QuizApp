@@ -5,27 +5,14 @@ import { useState } from 'react'
 import { stateSlice } from '../../redux-toolkit/reducers/stateReducer'
 import Loader from '../Loader/Loader'
 import {AiOutlineClose} from 'react-icons/ai'
-const Levels = () => {
+// TODO : delete useless code,levels is an array now not an object,so fix it
+const Levels = ({AllLevels}) => {
   const dispatch = useDispatch()
   const [errorMessage,setErrorMessage] = useState('')
-  const [levels,setLevels] = useState({})
-  const chosenLevels = useSelector(state => state.stateReducer.chosenLevels)
-  const {metaData,metaDataLoading,metaDataError} = useSelector(state => state.metaDataReducer)
-  const {SET_LEVEL,REMOVE_LEVEL,ADD_LEVEL} = stateSlice.actions
-    useEffect(() => {
-      if (!metaData) return;
-      const byDifficulty = metaData?.byDifficulty
-      if (!byDifficulty) return;
-      setLevels(byDifficulty)
-      let tempArray = []
-      Object.entries(byDifficulty).map(([name,value]) => {
-        if (name === 'null') return;
-        if (tempArray.includes(name)) return;
-        tempArray.unshift(name)
-      })
-      dispatch(SET_LEVEL(tempArray))
-  },[metaData])
+  const chosenLevels = useSelector(state => state.stateReducer.chosenLevels) // to display chosen levels
+  const {REMOVE_LEVEL,ADD_LEVEL} = stateSlice.actions
 
+  // handlers
   const REMOVE_OR_ADD_LEVEL = (level) => {
     if (chosenLevels.length === 1 && chosenLevels.includes(level)){
       setErrorMessage('You must select at least 1 difficulty')
@@ -43,40 +30,17 @@ const Levels = () => {
         {errorMessage && (
           <div className='selectError'>{errorMessage}<AiOutlineClose onClick={() => setErrorMessage('')} className='close-btn' size={25}/></div>
         )}
-       {metaDataLoading && !metaDataError
-       ? (
-        <Loader/>
-       )
-       : (
           <>
-            {metaDataError
-            ? (
-              <div className='metaDataError'>{metaDataError}</div>
-            )
-            : (
-              <>
-                {typeof levels === 'object' && Object.keys(levels).length
-                ? (
                   <div>
                       <h4>Active levels :  {`{${chosenLevels.length}}`},click on button to activate/deactivate</h4>
-                      {Object.entries(levels).map(([level,value]) => {
-                        // for some reason in DB,there is a null key,don't for what it stands for
-                        if (level === 'null') return;
+                      {AllLevels.map((level) => {
                         return(
                           <button key={level} onClick={() => REMOVE_OR_ADD_LEVEL(level)} className={`${chosenLevels.includes(level) ? 'level-button active' : 'level-button'}`}>{level}</button>
                         ) 
                       })}
                   </div>
-                )
-                : (
-                  <div className='metaDataError'>Something went wrong...</div>
-                )}
-              </>
-            )
-            }
-          </>
-       )}
-    </div>
+            </>
+        </div>
   )
 }
 

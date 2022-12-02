@@ -44,3 +44,15 @@ h1 {
 .mint {
   font-palette: --Mint;
 }
+.settingsBtn{
+  color: white;
+  margin-top: 0.3vh;
+}
+.centerdDiv{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.settingsBtn:hover{
+  color: blue;
+}
