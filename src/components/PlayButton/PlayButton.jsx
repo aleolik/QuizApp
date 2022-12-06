@@ -3,7 +3,6 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { stateSlice } from '../../redux-toolkit/reducers/stateReducer'
 import './PlayButton.css'
-import Loader from '../Loader/Loader'
 const PlayButton = () => {
   const {START_GAME} = stateSlice.actions
   const dispatch = useDispatch()
@@ -17,7 +16,7 @@ const PlayButton = () => {
     <div>
       {metaDataLoading
       ? (
-        <h6 style={{'textAlign':'center'}}>Please wait for loading...</h6>
+        <h3 style={{'textAlign':'center'}}>Please wait for loading...</h3>
       )
       : (
         <>

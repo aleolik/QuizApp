@@ -1,11 +1,11 @@
-.category-btn{
-    background-color: rgb(85,37,134);
+.category_btn{
+    background-color: #8B0000;
     margin: 0.5vh 1vw;
     width: 23vw;
     height: 3vh;
     color: white;
     border-radius: 10px;
-    border: palevioletred 2px solid;
+    border: black 2px solid;
     cursor: pointer;
 }
 .category-text{
@@ -16,17 +16,17 @@
     font-size: 17px;
     overflow: hidden;
 }
-.category-btn:hover{
+.category_btn:hover{
     font-size: 15.5px;
-    border: 2px aqua solid;
-    color: blue;
+    border: 2px blue solid;
+    color: white;
 }
 .active{
-    background: lawngreen;
-    color:black;
+    background: #013220;
+    border: 2px blue solid;
 }
 
-.genres{
+.categories{
     display: flex;
     text-align: center;
     justify-content: center;
@@ -36,43 +36,28 @@
     background-color: rgb(40,40,40);
     border: 5px solid rgb(64,64,64);
     flex-wrap: wrap;
-    color: white;
     border-radius: 20px;
-}
-.metaDataError{
-    background-color:#cc0000;
-    color: white;
-    border-radius: 10px;
-    max-width: 50vw;
-    max-height: 15vh;
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    min-width: 25vw;
-    min-height: 10vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 .selectError{   
     background-color:#b34045;
-    color: black;
     border-radius: 15px;
     max-width: 50vw;
     max-height: 5vh;
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     min-width: 50vw;
     min-height: 5vh;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.close-btn{
+.close_btn{
     color: black;
     margin-left: 0.15vw;
     border: 2px solid black;
     border-radius: 15px;
     cursor: pointer;
+    margin: 5px;
 }
-.close-btn:hover{
+.close_btn:hover{
     color: aqua;
     border: 2px solid aqua;
 }

@@ -3,9 +3,11 @@ import { createSlice } from "@reduxjs/toolkit";
 export const initialState = {
     /* GAME SETTINGS
     */
-    InGame : false, // for displaying uestions
+    InGame : false, // for displaying questions
     chosenCategories : [],
     chosenLevels : [],
+    chosenTime : 15, // float or int
+    chosenNumOfQuestins : 20,
     currentQuestion : 0, // for displaying current question
     COMPLETED_QUESTONS : [] // [{key:v},{key1:v1},etc]
 
@@ -56,5 +58,11 @@ export const stateSlice = createSlice({
            }
             state.COMPLETED_QUESTONS = [...state.COMPLETED_QUESTONS,newElem]
         },
+        SET_NEW_TIME(state,action){
+            state.chosenTime = action.payload
+        },
+        SET_NEW_NUM_OF_QUESTIONS(state,action){
+            state.chosenNumOfQuestins = action.payload
+        }
     }
 })

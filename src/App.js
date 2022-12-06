@@ -12,6 +12,9 @@ import React,{useEffect} from 'react'
 import useDispatchCategoires from './hooks/useDispatchCategories';
 import useDispatchLevels from './hooks/useDispatchLevels';
 import Levels from './components/Levels/Levels';
+import Time from './components/Time/Time';
+import NumberOfQuestions from './components/NumberOfQuestions/NumberOfQuestions';
+import BG from './media/bg.png'
 function App() {
   // categories
   const dispatch = useDispatch()
@@ -37,7 +40,7 @@ function App() {
 
 
   return (
-    <div className="app">
+    <div className="app" style={{'backgroundImage':inGame ? 'none' : `url(${BG})`,'backgroundRepeat':'no-repeat'}}>
         {showModal
          && (
           <Modal>
@@ -47,17 +50,23 @@ function App() {
              {currentSetting === 'Levels' && (
                 <Levels AllLevels={AllLevels}/>
             )}
+            {currentSetting === 'Time' && (
+              <Time/>
+            )}
+            {currentSetting === 'NumberOfQuestions' && (
+              <NumberOfQuestions/>
+            )}
           </Modal>
         )}
           <>
              <div className='purples centerdDiv' style={{'fontSize':25,'marginBottom':0.5+'vh'}}>Trivia App</div>
-             <div className='centerdDiv'><AiFillSetting  onClick={SettingsOnClick} size={60} className='settingsBtn'></AiFillSetting></div>
              {inGame
               ? (
                 <Questions/>
               )
               : (
                 <div>
+                    <div className='centerdDiv'><AiFillSetting  onClick={SettingsOnClick} size={60} className='settingsBtn'></AiFillSetting></div>
                     <PlayButton/>
                 </div>
               )}

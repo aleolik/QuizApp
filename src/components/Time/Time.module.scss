@@ -1,0 +1,26 @@
+.timeContainer{
+    background-color: rgb(40,40,40);
+    width: 40vw;
+    height: 40vh;
+    border: 5px solid rgb(64,64,64);
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.timeButton{
+    background-color: #8B0000;
+    color: white;
+    height: 5vh;
+    margin:5px;
+    border: 2px solid black;
+    border-radius: 10px;
+}
+.timeButton:hover{
+    border: 1px solid blue;
+}
+.active{
+	background-color: #013220;
+	border : 1px solid blue;
+}

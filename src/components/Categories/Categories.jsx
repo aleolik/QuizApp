@@ -1,10 +1,9 @@
-import './Categories.css'
+
 import React, { useState ,useEffect} from 'react'
-import Loader from '../Loader/Loader'
 import { useDispatch, useSelector } from 'react-redux'
 import { stateSlice } from '../../redux-toolkit/reducers/stateReducer'
 import {AiOutlineClose} from 'react-icons/ai'
-import SideBar from '../SideBar/SideBar'
+import css from './Categories.module.scss'
 const Categories = ({AllCategories}) => {
     const dispatch = useDispatch()
     const [selectError,setSelectedError] = useState('') // works,if chosenCategories.length === 1 and trying to delete the last category
@@ -28,22 +27,20 @@ const Categories = ({AllCategories}) => {
         }
     }
     return(
-    <div className='genres'>
-            <div>
+    <div className={css.categories}>
                 {selectError && (
-                  <div className="selectError">{selectError}<AiOutlineClose onClick={() => setSelectedError('')} className='close-btn' size={25}/></div>
+                  <div className={[css.selectError,'mint'].join(' ')}>{selectError}<AiOutlineClose onClick={() => setSelectedError('')} className={css.close_btn} size={25}/></div>
                 )}
                   <>
                       <div>
                            <h6>Active categoreis : {`{${chosenCategories.length}}`},click on button to activate/deactivate</h6>
                            {AllCategories.map((category) => {
                               return(
-                                  <button onClick={() => ADD_OR_REMOVE_CATEGORY(category)} className={`${chosenCategories.includes(category) ? 'category-btn active' : 'category-btn'}`} key={category}>{category}</button>
+                                  <button onClick={() => ADD_OR_REMOVE_CATEGORY(category)} className={chosenCategories.includes(category) ? [css.category_btn,css.active].join(' ') : css.category_btn} key={category}>{category}</button>
                                )
                             })}
                       </div>
                   </>
-          </div>
         </div>
     )
 }

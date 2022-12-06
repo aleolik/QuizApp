@@ -11,7 +11,7 @@
 
 
 .modal_content{
-    background-color: white;
+    background-color: rgb(20,20,20);
     padding: 25px;
     border-radius: 16px;
     width: 80vw;
@@ -32,7 +32,6 @@
     font-weight: bold;
 }
 .endBtn{
-    background-color: black;
     color: white;
     align-self:flex-end;
     justify-self:flex-start;
@@ -41,5 +40,5 @@
 }
 .endBtn:hover{
     color: red;
-    transform: scale(1.2)
+    transform: scale(1.15)
 }

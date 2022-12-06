@@ -4,9 +4,8 @@ import {useDispatch, useSelector} from 'react-redux'
 import { useEffect } from 'react'
 import { LoadQuestions } from '../../redux-toolkit/asyncСreators/LoadQuestions'
 import LoaderForQuestions from '../LoaderForQuestions/LoaderForQuestions'
-import { shuffleArray } from '../../utils/shuffleArray'
 import { stateSlice } from '../../redux-toolkit/reducers/stateReducer'
-import {TimeOfGame} from '../TimeOfGame/TimeOfGame'
+import {Timer} from '../Timer/Timer'
 // TODO answer the question bug
 const Questions =  () => {
     const dispatch = useDispatch()
@@ -35,7 +34,7 @@ const Questions =  () => {
                     )
                     : (
                         <div className={css.container}>
-                                <TimeOfGame/>
+                                <Timer/>
                                 <div className={css.containerOfSelectors}>
                                     {Questions?.map((question,i) => {
                                         let answeredQuestion = false
