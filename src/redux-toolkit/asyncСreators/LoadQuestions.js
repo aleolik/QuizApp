@@ -15,15 +15,15 @@ export const GetNumsForLevels = (chosenLevels,NUM_OF_QUESTIONS=20) => {
         return [firstInt,secondInt]
     }
     if(chosenLevels.length === 3){
-        const firstInt = GetRandomInt(NUM_OF_QUESTIONS/2)+1 // [1,10]
-        const secondInt = GetRandomInt(NUM_OF_QUESTIONS/2)+1 // [1,10]
+        const firstInt = GetRandomInt(Math.floor(NUM_OF_QUESTIONS/2))
+        const secondInt = GetRandomInt(Math.floor(NUM_OF_QUESTIONS/2))
         const thridInt = NUM_OF_QUESTIONS - secondInt - firstInt
         return [firstInt,secondInt,thridInt]
     }
 }
 export const LoadQuestions = () => {
     return async(dispatch,getState) => {
-        const NUM_OF_QUESTIONS = 20
+        const NUM_OF_QUESTIONS = getState().stateReducer.chosenNumOfQuestins
         const {chosenLevels,chosenCategories} = getState().stateReducer
         const ChosenCategoriesToLowerCase = []
         // ---- PROCESSING CATEGORIES IN NEEDED FORM ----
@@ -44,7 +44,7 @@ export const LoadQuestions = () => {
         // ---- URL LOGIC --
         let QuestionURL = `https://the-trivia-api.com/api/questions?categories=${chosenCategories.join(',')}`
         const NumsForLevels = GetNumsForLevels(chosenLevels,NUM_OF_QUESTIONS)
-        console.log(ChosenCategoriesToLowerCase.join(','))
+        console.log(NumsForLevels,'nums')
         const FirstQuestionURL = `https://the-trivia-api.com/api/questions?categories=${ChosenCategoriesToLowerCase.join(',')}&limit=${NumsForLevels[0]}&difficulty=${chosenLevels[0]}`
         let SecondQuestionURL;
         let thirdQuestionURL;

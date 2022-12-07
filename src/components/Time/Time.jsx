@@ -10,6 +10,7 @@ const Time = () => {
 
   // handlers
   const DISPATCH_NEW_TIME = (newTime) => {
+    if (newTime === chosenTime) return;
     dispatch(SET_NEW_TIME(newTime))
   }
   return (
