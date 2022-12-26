@@ -3,14 +3,24 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { stateSlice } from '../../redux-toolkit/reducers/stateReducer'
 import './PlayButton.css'
+import { LoadQuestions } from '../../redux-toolkit/asyncСreators/LoadQuestions'
+import { QuestionSlice } from '../../redux-toolkit/reducers/QuestionsReducer'
 const PlayButton = () => {
   const {START_GAME} = stateSlice.actions
   const dispatch = useDispatch()
   const {metaDataLoading,metaDataError} = useSelector(state => state.metaDataReducer)
+  const Questions = useSelector(state => state.questions.Questions)
+  const CHANGE_CURRENT_QUESTION = QuestionSlice.actions.CHANGE_CURRENT_QUESTION
+
 
   const START_GAME_ON_CLICK = () => {
     if (metaDataLoading || metaDataError) return;
-    dispatch(START_GAME())
+    // loads questions
+    dispatch(LoadQuestions()).then((arr) => {
+          dispatch(CHANGE_CURRENT_QUESTION(arr[0]?.id))
+          // start game
+          dispatch(START_GAME())
+    })
   }
   return (
     <div>
@@ -21,8 +31,7 @@ const PlayButton = () => {
       : (
         <>
           {metaDataError && (
-              // TODO : give error classname
-              <h6 style={{'textAlign':'center'}}>{metaDataError}</h6>
+              <h6 className='darkRedBtn' style={{'textAlign':'center'}}>{metaDataError}</h6>
           )}
         </>
       )}

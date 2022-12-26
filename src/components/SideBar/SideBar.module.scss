@@ -1,23 +1,11 @@
 .sideBar{
-	width: 80vw;
+	width: 85vw;
 	height: 10vh;
 	background-color: rgba(64,64,64);
 	margin-bottom: 10vh;
 	border-radius: 20px;
-	flex-direction: row;
-}
-.btnSetting{
-	height: 5vh;
-	margin: 2vh 0.5vw;
-	border-radius: 20px;
-	background-color: rgb(40,40,40);
-	color: white;
-	border: 1px solid white;
-}
-.btnSetting:hover{
-	border : 1px solid blue;
-}
-.active{
-	background-color: #013220;
-	border : 1px solid blue;
+	align-items: center;
+	border: solid 2px rgb(40,40,40);
+	display: flex;
+	justify-content: center;
 }

@@ -1,0 +1,59 @@
+
+  $blue: #3498db;
+  $orange : #FF6314;
+  $green : #90EE90;
+  $yellow:  #FFC229;
+  $red : rgb(202, 60, 60);
+  
+  .textMaxSymbols{
+    text-overflow: ellipsis;
+    max-width: 90vw;
+    max-height: 10vh;
+    overflow: hidden;
+    white-space: nowrap;
+    display: inline-block;  
+  }
+  .buttonAnswerDefault{
+    box-shadow: #ADCFFF 0 -12px 6px inset;
+    background-color: #FFFFFF;
+    color: #000000;
+  }
+  .buttonAnswer {
+    appearance: none;
+    border-radius: 40em;
+    border-style: none;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: inline-block;
+    font-family: -apple-system,sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: -.24px;
+    margin: 1vh;
+    outline: none;
+    padding: 1rem 1.3rem;
+    quotes: auto;
+    text-align: center;
+    text-decoration: none;
+    transition: all .15s;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: 80vw;
+    min-height: 7.5vh;
+    max-height: 20vh;
+    text-align: center;
+  }
+  .buttonAnswerActive{
+    background-color: #FFC229;
+    box-shadow: #FF6314 0 -6px 8px inset;
+    transform: scale(1.1);
+  }
+  .buttonAnswer:hover {
+    background-color: #FFC229;
+    box-shadow: #FF6314 0 -6px 8px inset;
+  }
+  .activeBtn{
+    background-color: #FFC229;
+    box-shadow: #FF6314 0 -6px 8px inset;
+}

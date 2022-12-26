@@ -1,19 +1,20 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { modalSlice, PossibleSettings } from '../../redux-toolkit/reducers/ModalReducer'
+import { settingSlice } from '../../redux-toolkit/reducers/SettingsModal'
+import { Settings } from '../../pages/MainMenu/MainMenu'
 import css from './SideBar.module.scss'
+import { useDispatch,useSelector } from 'react-redux'
 const SideBar = () => {
-  const currentSetting = useSelector(state => state.modal.currentSetting)
+  const currentSetting = useSelector(state => state.setting.currentSetting)
   const dispatch = useDispatch()
-  const SET_NEW_CURRENT_SETTING = modalSlice.actions.SET_NEW_CURRENT_SETTING
+  const SET_NEW_CURRENT = settingSlice.actions.SET_NEW_CURRENT
   const dispatchCurrentSetting = (newSetting) => {
-    dispatch(SET_NEW_CURRENT_SETTING(newSetting))
+    dispatch(SET_NEW_CURRENT(newSetting))
   }
   return (
     <div className={css.sideBar}>
-        {PossibleSettings.map((setting) => {
+        {Settings.map((setting) => {
           return(
-            <button onClick={() => dispatchCurrentSetting(setting)} style={{'width':75/PossibleSettings.length+'vw'}}  className={currentSetting === setting ? [css.btnSetting,css.active].join(' ') : css.btnSetting}>{setting}</button>
+            <button key={setting}  onClick={() => dispatchCurrentSetting(setting)} style={{'width':80/Settings.length+'vw','marginLeft':1+'vw'}}  className={currentSetting === setting ? ['glowButton','activeBtn'].join(' ') : 'glowButton'}>{setting}</button>
           )
         })}
     </div>

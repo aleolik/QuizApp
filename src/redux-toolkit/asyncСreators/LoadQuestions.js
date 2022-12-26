@@ -30,7 +30,6 @@ export const LoadQuestions = () => {
         for (let i = 0;i<chosenCategories.length;i++){
             const LowerCaseCategory = chosenCategories[i].toLowerCase().split(' ')
             for (let j = 0;j<LowerCaseCategory.length;j++){
-                console.log(LowerCaseCategory.length)
                 if (LowerCaseCategory[j] === ' '){
                     LowerCaseCategory[j] = '_'
                 }
@@ -42,9 +41,7 @@ export const LoadQuestions = () => {
         }
         const {LoadQuestions,LoadQuestionsError,LoadQuestionsSuccess} = QuestionSlice.actions
         // ---- URL LOGIC --
-        let QuestionURL = `https://the-trivia-api.com/api/questions?categories=${chosenCategories.join(',')}`
         const NumsForLevels = GetNumsForLevels(chosenLevels,NUM_OF_QUESTIONS)
-        console.log(NumsForLevels,'nums')
         const FirstQuestionURL = `https://the-trivia-api.com/api/questions?categories=${ChosenCategoriesToLowerCase.join(',')}&limit=${NumsForLevels[0]}&difficulty=${chosenLevels[0]}`
         let SecondQuestionURL;
         let thirdQuestionURL;
@@ -89,10 +86,8 @@ export const LoadQuestions = () => {
                 question['AllAnswers'] = AllAnswers
                 ArrOfQuestions[i] = question
             })
-            setTimeout(() => {
-                dispatch(LoadQuestionsSuccess(ArrOfQuestions))
-                
-            }, 1200);
+            dispatch(LoadQuestionsSuccess(ArrOfQuestions))
+            return ArrOfQuestions
         }
         catch(err){
             const message = ErrorChecker(err)

@@ -1,12 +1,12 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { stateSlice } from '../../redux-toolkit/reducers/stateReducer'
+import SideBar from '../SideBar/SideBar'
 import css from './NumberOfQuestions.module.scss'
-
-// TODO : better styles
+import { isMobile } from 'react-device-detect'
 export const PossibleNumOfQuestions = [
    // limit 50 in 1 api call
-    10,15,20,25,30,35,40,45,50
+    10,12,14,16,20,22,24,32
 ]
 const NumberOfQuestions = () => {
 
@@ -21,15 +21,18 @@ const NumberOfQuestions = () => {
     dispatch(SET_NEW_NUM_OF_QUESTIONS(num))
   }
   return (
-    <div className={css.container}>
+    <div>
+        <SideBar/>
+        <div className={css.container}>
          <h4>Number of Questions :  {`{${chosenNumOfQuestins}}`},click on button to activate/deactivate</h4>
-         <div style={{'flexDirection':'row'}}>
-            {PossibleNumOfQuestions.map((possibleNum) => {
-                return(
-                    <button style={{'height':20*Math.ceil(PossibleNumOfQuestions.length/3)}} key={possibleNum} onClick={() => DISPATCH_SET_NUM_OF_QUESTIONS(possibleNum)} className={`${chosenNumOfQuestins === possibleNum ? `${[css.btn_selector,css.active].join(' ')}` : `${css.btn_selector}`}`}>{possibleNum}</button>
-                )
-            })}
-         </div>
+            <div style={{'flexDirection':'row'}}>
+                {PossibleNumOfQuestions.map((possibleNum) => {
+                    return(
+                        <button style={{'width':isMobile ? 30+'vw':35+'vw'}} key={possibleNum} onClick={() => DISPATCH_SET_NUM_OF_QUESTIONS(possibleNum)} className={chosenNumOfQuestins === possibleNum ? ['glowButton','activeBtn'].join(' ') : 'glowButton'}>{possibleNum}</button>
+                    )
+                })}
+            </div>
+        </div>
     </div>
   )
 }

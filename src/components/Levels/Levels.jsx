@@ -4,6 +4,7 @@ import { useDispatch,useSelector } from 'react-redux'
 import { useState } from 'react'
 import { stateSlice } from '../../redux-toolkit/reducers/stateReducer'
 import {AiOutlineClose} from 'react-icons/ai'
+import SideBar from '../SideBar/SideBar'
 // TODO : delete useless code,levels is an array now not an object,so fix it
 const Levels = ({AllLevels}) => {
   const dispatch = useDispatch()
@@ -25,21 +26,24 @@ const Levels = ({AllLevels}) => {
     dispatch(ADD_LEVEL(level))
   }
   return (
-    <div className={css.levels}>
+    <div>
+        <SideBar/>
+        <div className={css.levels}>
         {errorMessage && (
-          <div className={[css.selectError,'mint'].join(' ')}>{errorMessage}<AiOutlineClose onClick={() => setErrorMessage('')} className={css.close_btn} size={25}/></div>
+          <div className={css.selectError}>{errorMessage}<AiOutlineClose onClick={() => setErrorMessage('')} className={css.close_btn} size={25}/></div>
         )}
           <>
                   <div>
                       <h4>Active levels :  {`{${chosenLevels.length}}`},click on button to activate/deactivate</h4>
                       {AllLevels.map((level) => {
                         return(
-                          <button key={level} onClick={() => REMOVE_OR_ADD_LEVEL(level)} className={`${chosenLevels.includes(level) ? [css.level_button,css.active].join(' ') : css.level_button}`}>{level}</button>
+                          <button style={{'width':25+'vw'}} key={level} onClick={() => REMOVE_OR_ADD_LEVEL(level)} className={chosenLevels.includes(level) ? ['glowButton','activeBtn'].join(' ') : 'glowButton'}>{level}</button>
                         ) 
                       })}
                   </div>
             </>
         </div>
+    </div>
   )
 }
 

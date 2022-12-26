@@ -7,7 +7,7 @@ import SideBar from '../SideBar/SideBar'
 import css from './Modal.module.scss'
 import {AiOutlineClose} from 'react-icons/ai'
 const Modal  = ({children}) => {
-  const {CHANGE_MODAL_STATE} = modalSlice.actions
+  const DISABLE_MODAL_WINDOW = modalSlice.actions.DISABLE_MODAL_WINDOW
   const showModal = useSelector(state => state.modal.showModal)
   const dispatch = useDispatch()
   const rootClasses = [css.modal]
@@ -15,15 +15,12 @@ const Modal  = ({children}) => {
 
   // handlers
   const closeModalWindow = () => {
-    dispatch(CHANGE_MODAL_STATE())
+    dispatch(DISABLE_MODAL_WINDOW())
   }
   return (
       <div className={rootClasses.join(' ')} onClick={closeModalWindow}>
         <div className={css.modal_content} onClick={(e) => e.stopPropagation()}>
           <AiOutlineClose onClick={closeModalWindow} className={css.endBtn} size={30}/>
-          <SideBar/> {/* can be in children element,but since i use modal component only for 1 purpose
-          so i decided to put it here.
-           */}
           {children}
         </div>
       </div>

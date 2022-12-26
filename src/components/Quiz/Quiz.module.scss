@@ -1,0 +1,48 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+$blue: #3498db;
+$orange : #FF6314;
+$green : #90EE90;
+$yellow:  #FFC229;
+.container{
+    min-width: 90vw;
+    max-width: 90vw;
+    min-height: 80vh;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.containerOfQuestion{
+  min-width: 90vw;
+  max-width: 90vw;
+  min-height: 58vh;
+  max-height: 58vh;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+}
+
+.activeBtn{
+  background-color: #FFC229;
+  box-shadow: #FF6314 0 -6px 8px inset;
+}
+.completedQuestion{
+  background-color : $green;
+}
+
+
+
+.endBtn{
+    border-radius: 15px;
+    min-height: 5vh;
+    min-width: 15vw;
+    color: white;
+    background-color: $orange;
+    margin-top: 2vh;
+    z-index: 1000;
+}
+.endBtn:hover{
+  border: 2px solid aqua;
+}

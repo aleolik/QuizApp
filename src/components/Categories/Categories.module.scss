@@ -1,13 +1,4 @@
-.category_btn{
-    background-color: #8B0000;
-    margin: 0.5vh 1vw;
-    width: 23vw;
-    height: 3vh;
-    color: white;
-    border-radius: 10px;
-    border: black 2px solid;
-    cursor: pointer;
-}
+
 .category-text{
     display: inline-block;
     font-family: Arial, Helvetica, sans-serif;
@@ -16,35 +7,26 @@
     font-size: 17px;
     overflow: hidden;
 }
-.category_btn:hover{
-    font-size: 15.5px;
-    border: 2px blue solid;
-    color: white;
-}
-.active{
-    background: #013220;
-    border: 2px blue solid;
-}
+
 
 .categories{
     display: flex;
     text-align: center;
     justify-content: center;
     align-items: center;
-    width: 50vw;
-    height: 35vh;
     background-color: rgb(40,40,40);
     border: 5px solid rgb(64,64,64);
     flex-wrap: wrap;
     border-radius: 20px;
+    width: 85vw;
+    min-height: 25vh;
+    max-height: 50vh;
 }
 .selectError{   
     background-color:#b34045;
     border-radius: 15px;
-    max-width: 50vw;
-    max-height: 5vh;
-    min-width: 50vw;
-    min-height: 5vh;
+    width: 60vw;
+    height: 8vh;
     display: flex;
     justify-content: center;
     align-items: center;

@@ -1,16 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { PossibleNumOfQuestions } from "../../components/NumberOfQuestions/NumberOfQuestions";
+import { possibleChosenTime } from "../../components/Time/Time";
 
 export const initialState = {
     /* GAME SETTINGS
     */
-    InGame : false, // for displaying questions
+    inGame : false, // for displaying questions
     chosenCategories : [],
     chosenLevels : [],
-    chosenTime : 15, // float or int
-    chosenNumOfQuestins : 20,
-    currentQuestion : 0, // for displaying current question
-    COMPLETED_QUESTONS : [] // [{key:v},{key1:v1},etc]
-
+    chosenTime : possibleChosenTime[0], // float or int
+    chosenNumOfQuestins : PossibleNumOfQuestions.length % 2 === 0 ? PossibleNumOfQuestions[PossibleNumOfQuestions.length/2] : PossibleNumOfQuestions[Math.floor(PossibleNumOfQuestions.length/2)],
 }
 
 export const stateSlice = createSlice({
@@ -37,32 +36,13 @@ export const stateSlice = createSlice({
             state.chosenLevels = action.payload
         },
         START_GAME(state){
-            state.InGame = true
-        },
-        CHANGE_CURRENT_QUESTION(state,action){
-            state.currentQuestion = action.payload
-        },
-        ADD_ANSWER_TO_QUESTION(state,action){
-           const payload = action.payload
-           const newElem = payload?.newElem
-           const currentIndex = newElem?.index
-           console.log(payload)
-           for (let i = 0;i<state.COMPLETED_QUESTONS.length;i++){
-                const elem = state.COMPLETED_QUESTONS[i]
-                const index = elem?.index
-                console.log('index',index)
-                if (index === currentIndex){
-                    state.COMPLETED_QUESTONS[i] = newElem
-                    return;
-                }
-           }
-            state.COMPLETED_QUESTONS = [...state.COMPLETED_QUESTONS,newElem]
+            state.inGame = true
         },
         SET_NEW_TIME(state,action){
             state.chosenTime = action.payload
         },
         SET_NEW_NUM_OF_QUESTIONS(state,action){
             state.chosenNumOfQuestins = action.payload
-        }
+        },
     }
 })

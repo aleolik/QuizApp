@@ -1,25 +1,31 @@
 import React, { useEffect, useState } from 'react'
-import {useSelector} from 'react-redux'
-export const Timer = () => {
+import {useDispatch, useSelector} from 'react-redux'
+import { useFinishTest } from '../../hooks/useFinishTest'
+import {stateSlice} from '../../redux-toolkit/reducers/stateReducer'
+import { RenderTimeFormat } from '../../utils/RenderTimeFormat'
+export const Timer = ({interValID,SetInterValID,time,setTime,testFinished}) => {
 
-  const startTime = useSelector(state => state.stateReducer.chosenTime) 
-
-  const [time,setTime] = useState(startTime*60)
+  const {Questions} = useSelector(state => state.questions)
+  const dispatch = useDispatch()
+  const finishTest = useFinishTest(Questions)
 
   useEffect(() => {
-    setInterval(() => {
+    if (testFinished) return;
+    const TimeChange = () => {
       setTime((prev) => (prev-1))
-    },1000)
+    }
+    if (!interValID){
+      SetInterValID(setInterval(TimeChange,1000))
+    }
   },[])
+  useEffect(() => {
+    if (time === 0){
+      SetInterValID(clearInterval(interValID))
+      finishTest()
+    }
+  },[time])
 
-  const mins = Math.floor(time/60)
-  const seconds = Math.floor(time%60)
-  const hours = Math.floor(time/60/60)
-
-  // TODO : when time is <= 0,then end the game
   return (
-    <div style={{'textAlign':'center'}}>
-         {hours}:{mins}:{seconds}
-    </div>
+   <RenderTimeFormat timeInSeconds={time}/>
   )
 }
