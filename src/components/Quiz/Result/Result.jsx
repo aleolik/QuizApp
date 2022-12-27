@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import css from './Result.module.scss'
 import css2 from '../Questions/Questions.module.scss'
 import { useDispatch, useSelector } from "react-redux";
@@ -39,7 +39,7 @@ const Result = ({time}) => {
             Your result : {CORRECT_ANSWERS?.length}/{Questions?.length}
             <div/>
             <div style={{'display':"flex"}}>time left : <RenderTimeFormat timeInSeconds={time}/></div>
-            <button onClick={() => dispatch(DISABLE_MODAL_WINDOW())} style={{'width':40+'vw'}} className={css2.buttonAnswer}>show results</button>
+            <button onClick={() => dispatch(DISABLE_MODAL_WINDOW())} style={{'width':40+'vw'}} className={css2.buttonAnswer}>show answers</button>
         </div>
     )
 }

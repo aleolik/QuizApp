@@ -28,7 +28,7 @@ const Quiz =  () => {
     const finishTest = useFinishTest(Questions)
 
     const endTest = () => {
-        if (COMPLETED_QUESTONS.length !== Questions.length){
+        if (COMPLETED_QUESTONS.length !== Questions.length && !testFinished){
             setShowWarning(true) 
             return;  
         }
@@ -61,8 +61,11 @@ const Quiz =  () => {
                             )
                             : (
                              <div>
-                                {time !== 0 && (
+                                {!testFinished ? (
                                     <Timer interValID={interValID} SetInterValID={SetInterValID} time={time} setTime={setTime} testFinished={testFinished}/>
+                                )
+                                : (
+                                    <></>
                                 )}
                                 <SelectorsComponent testFinished={testFinished}/>
                                 <div className={css.containerOfQuestion}>

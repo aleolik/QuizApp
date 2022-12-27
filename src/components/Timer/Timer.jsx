@@ -11,11 +11,11 @@ export const Timer = ({interValID,SetInterValID,time,setTime,testFinished}) => {
 
   useEffect(() => {
     if (testFinished) return;
-    const TimeChange = () => {
+    const tick = () => {
       setTime((prev) => (prev-1))
     }
     if (!interValID){
-      SetInterValID(setInterval(TimeChange,1000))
+      SetInterValID(setInterval(tick,1000))
     }
   },[])
   useEffect(() => {

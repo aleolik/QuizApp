@@ -35,7 +35,6 @@ const SelectorsComponent =  ({testFinished}) => {
                                     }
                                 }   
                                 else{
-                                    console.log('else block')
                                     colorClassName = 'purpleBtn'
                                 }
                             }

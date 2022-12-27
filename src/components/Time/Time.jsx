@@ -4,7 +4,7 @@ import { stateSlice } from '../../redux-toolkit/reducers/stateReducer'
 import SideBar from '../SideBar/SideBar'
 import css from './Time.module.scss'
 import {isBrowser,isMobile,isTablet} from 'react-device-detect'
-export const possibleChosenTime = [5,12,14,16,20,25,30,45]
+export const possibleChosenTime = [5,10,12,14,16,20,24,30]
 const Time = () => {
   const dispatch = useDispatch()
   const SET_NEW_TIME = stateSlice.actions.SET_NEW_TIME
@@ -15,8 +15,6 @@ const Time = () => {
     if (newTime === chosenTime) return;
     dispatch(SET_NEW_TIME(newTime))
   }
-
-  // IDEA : user can type the amount of time he needs
   return (
     <div>
       <SideBar/>

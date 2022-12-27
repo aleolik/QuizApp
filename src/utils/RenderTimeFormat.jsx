@@ -1,7 +1,7 @@
 import React from "react"
 
 export const RenderTimeFormat = ({timeInSeconds}) => {
-  if (!timeInSeconds) return <></>
+  if (timeInSeconds === undefined || typeof timeInSeconds !== 'number') return <></>
   const mins = Math.floor(timeInSeconds/60)
   const seconds = Math.floor(timeInSeconds%60)
   const hours = Math.floor(timeInSeconds/60/60)
