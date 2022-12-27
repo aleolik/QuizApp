@@ -40,7 +40,7 @@ const Result = ({time}) => {
             Your result : {CORRECT_ANSWERS?.length}/{Questions?.length}
             <div/>
             <div style={{'display':"flex"}}>time left : <RenderTimeFormat timeInSeconds={time}/></div>
-            <button onClick={() => dispatch(DISABLE_MODAL_WINDOW())} style={{'width':isMobile ? 25+'vw' : 20 +'vw','height':20+'vh'}} className={css2.buttonAnswer}>show answers</button>
+            <button onClick={() => dispatch(DISABLE_MODAL_WINDOW())} style={{'width':isMobile ? 40+'vw' : 15 +'vw','height':isMobile ? 25+'vh' : 10+'vh'}} className={css2.buttonAnswer}>show answers</button>
         </div>
     )
 }

@@ -1,6 +1,8 @@
 .app{
-  width: 100vw;
-  height: 100vh;
+
+  min-width: 100vw;
+  min-height: 100vh;
+  max-height: 250vh;
   background-color: rgb(18,18,18);
   padding-top: 5vh;
   color: white;
