@@ -4,7 +4,8 @@
     justify-content: center;
     align-items: center;
     width: 80vw;
-    height: 35vh;
+    min-height: 60vh;
+    max-height: 180h;
     background-color: rgb(40,40,40);
     border: 5px solid rgb(64,64,64);
     flex-wrap: wrap;

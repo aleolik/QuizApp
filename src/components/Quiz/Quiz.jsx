@@ -70,7 +70,7 @@ const Quiz =  () => {
                                 <SelectorsComponent testFinished={testFinished}/>
                                 <div className={css.containerOfQuestion}>
                                     <QuestionsComponent testFinished={testFinished}/>
-                                    <button style={{'width':isMobile ? 40+'vw' : 15+'vw','height':isMobile ? 25+'vh' : 10+'vh'}} onClick={endTest} className={css2.buttonAnswer}>{testFinished ? 'Show results': 'Finish Test'}</button>
+                                    <button style={{'width':isMobile ? 60+'vw' : 40+'vw','height':isMobile ? 40+'vh' : 10+'vh'}} onClick={endTest} className={css2.buttonAnswer}>{testFinished ? 'Show results': 'Finish Test'}</button>
                                 </div>
                             </div>
                             )}
