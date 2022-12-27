@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { GetRandomInt } from "../../../redux-toolkit/asyncСreators/LoadQuestions";
 import { modalSlice } from "../../../redux-toolkit/reducers/ModalReducer";
 import { RenderTimeFormat } from "../../../utils/RenderTimeFormat";
+import { isMobile } from "react-device-detect";
 
 const Result = ({time}) => {
     const {CORRECT_ANSWERS,Questions} = useSelector(state => state.questions)
@@ -39,7 +40,7 @@ const Result = ({time}) => {
             Your result : {CORRECT_ANSWERS?.length}/{Questions?.length}
             <div/>
             <div style={{'display':"flex"}}>time left : <RenderTimeFormat timeInSeconds={time}/></div>
-            <button onClick={() => dispatch(DISABLE_MODAL_WINDOW())} style={{'width':40+'vw'}} className={css2.buttonAnswer}>show answers</button>
+            <button onClick={() => dispatch(DISABLE_MODAL_WINDOW())} style={{'width':isMobile ? 25+'vw' : 20 +'vw','height':20+'vh'}} className={css2.buttonAnswer}>show answers</button>
         </div>
     )
 }

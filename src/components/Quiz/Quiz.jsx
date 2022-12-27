@@ -11,6 +11,7 @@ import Result from './Result/Result'
 import SelectorsComponent from './Selectors/Selectors'
 import QuestionsComponent from './Questions/Questions'
 import Modal from '../Modal/Modal'
+import { isMobile } from 'react-device-detect'
 
 const Quiz =  () => {
     const dispatch = useDispatch()
@@ -34,7 +35,6 @@ const Quiz =  () => {
         }
         if (!finishTest) return;
         finishTest(interValID,SetInterValID)
-        // TODO : 1)show corret/uncorrect answers,2)show result  menu,3)when time ends - end the game
     }
     return(
         <div style={{'display':'flex','alignItems':'center','height':'inherit','width':'inherit','flexDirection':'column'}}>
@@ -70,7 +70,7 @@ const Quiz =  () => {
                                 <SelectorsComponent testFinished={testFinished}/>
                                 <div className={css.containerOfQuestion}>
                                     <QuestionsComponent testFinished={testFinished}/>
-                                    <button style={{'width':25+'vw'}} onClick={endTest} className={css2.buttonAnswer}>{testFinished ? 'Show results': 'Finish Test'}</button>
+                                    <button style={{'width':isMobile ? 25+'vw' : 20+'vw','height':20+'vh'}} onClick={endTest} className={css2.buttonAnswer}>{testFinished ? 'Show results': 'Finish Test'}</button>
                                 </div>
                             </div>
                             )}

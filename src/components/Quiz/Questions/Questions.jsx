@@ -50,7 +50,7 @@ const QuestionsComponent = ({testFinished}) => {
                                     <button  style={{'transform':`${glowAnsweredButton ? 'scale(1.1) ': ''}`}} key={answer} onClick={() => ANSWER_ON_CLICK({id:id,answer:answer})}  className={glowAnsweredButton && !testFinished ? [css.buttonAnswerActive,css.buttonAnswer].join(' ') : [css.buttonAnswer,ADDITIONAL_CLASSNAME].join(' ')} role="button">
                                         <span>
                                             {answer}
-                                            <div style={{'fontSize':20,'color':'black'}}>{glowAnsweredButton ? ' - Your Answer' : ''}</div>
+                                            <div style={{'fontSize':20,'color':'black'}}>{glowAnsweredButton && testFinished ? ' - Your Answer' : ''}</div>
                                         </span>
                                     </button>
                                 </div>
